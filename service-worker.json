@@ -1,21 +1,27 @@
 const CACHE_NAME = "genki-cache-v1";
-const urlsToCache = [
-  "./index.html",
-  "./resources"
-];
 
 self.addEventListener("install", event => {
+  // Optional: pre-cache minimal core files
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(urlsToCache);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll([
+      "./index.html",
+      "./css/style.css",
+      "./js/main.js"
+    ]))
   );
 });
 
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+    caches.match(event.request).then(cached => {
+      if (cached) return cached;
+
+      return fetch(event.request).then(response => {
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
     })
   );
 });
