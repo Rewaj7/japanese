@@ -2,6 +2,13 @@
 <html lang="en" prefix="og: http://ogp.me/ns#" class="lang-en">
   <head>
     <meta charset="UTF-8">
+    <link rel="manifest" href="manifest.json">
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("service-worker.js")
+          .then(() => console.log("Service Worker registered"));
+      }
+    </script>
     <title>Genki Exercises - 2nd Edition | Genki Study Resources</title>
     <meta name="title" content="Genki Exercises - 2nd Edition | Genki Study Resources">
     <meta name="twitter:title" content="Genki Exercises - 2nd Edition | Genki Study Resources">
