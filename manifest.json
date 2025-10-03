@@ -1,7 +1,7 @@
 {
   "name": "Genki Study Resources",
   "short_name": "Genki",
-  "start_url": "./index.html",
+  "start_url": "./lessons-3rd/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4a90e2",
